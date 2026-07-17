@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alolika Bhowmik — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nf-black:#0b0b0b;
+    --nf-black-2:#141414;
+    --nf-black-3:#1c1c1c;
+    --nf-red:#e50914;
+    --nf-red-dark:#a30a12;
+    --nf-white:#f5f5f1;
+    --nf-gray:#a6a6a6;
+    --nf-gray-dim:#6d6d6d;
+    --nf-line:#2c2c2c;
+    --font-display:'Bebas Neue', 'Arial Narrow', sans-serif;
+    --font-body:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--nf-black);
+    color:var(--nf-white);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+  }
+  ::-webkit-scrollbar{height:10px;width:10px;}
+  ::-webkit-scrollbar-track{background:var(--nf-black-2);}
+  ::-webkit-scrollbar-thumb{background:var(--nf-line);border-radius:5px;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--nf-red);outline-offset:2px;}
+
+  /* ===== INTRO ===== */
+  #intro{
+    position:fixed;inset:0;background:#000;z-index:9999;
+    display:flex;align-items:center;justify-content:center;
+    animation: introOut 0.6s ease 2.2s forwards;
+  }
+  #intro .bars{display:flex;gap:6px;}
+  #intro .bar{
+    width:16px;height:90px;background:var(--nf-red);
+    transform:scaleY(0);transform-origin:bottom;
+    animation: barGrow 0.7s cubic-bezier(.2,.9,.3,1) forwards;
+  }
+  #intro .bar:nth-child(1){animation-delay:.05s;}
+  #intro .bar:nth-child(2){animation-delay:.15s;height:130px;}
+  #intro .bar:nth-child(3){animation-delay:.25s;height:70px;}
+  #intro .bar:nth-child(4){animation-delay:.35s;height:150px;}
+  #intro .letters{
+    font-family:var(--font-display);font-size:64px;letter-spacing:4px;
+    margin-left:18px;opacity:0;
+    animation: fadeIn .5s ease 1.1s forwards;
+  }
+  @keyframes barGrow{to{transform:scaleY(1);}}
+  @keyframes fadeIn{to{opacity:1;}}
+  @keyframes introOut{to{opacity:0;visibility:hidden;pointer-events:none;}}
+  @media (prefers-reduced-motion: reduce){
+    #intro{animation:introOut 0.3s ease 0.4s forwards;}
+    #intro .bar, #intro .letters{animation:none;transform:scaleY(1);opacity:1;}
+  }
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:500;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 44px;
+    background:linear-gradient(to bottom, rgba(0,0,0,.8), transparent);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  header.solid{background:var(--nf-black-2);box-shadow:0 2px 10px rgba(0,0,0,.5);}
+  .logo{
+    font-family:var(--font-display);color:var(--nf-red);
+    font-size:30px;letter-spacing:1px;
+  }
+  nav{display:flex;gap:26px;align-items:center;}
+  nav a{font-size:14px;color:var(--nf-white);opacity:.85;font-weight:500;}
+  nav a:hover{opacity:1;text-decoration:underline;}
+  .nav-badge{
+    font-size:12px;border:1px solid var(--nf-gray-dim);border-radius:3px;
+    padding:5px 10px;color:var(--nf-gray);
+  }
+  @media (max-width:720px){
+    header{padding:14px 18px;}
+    nav{gap:14px;}
+    nav a{font-size:12px;}
+    .nav-badge{display:none;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;position:relative;
+    display:flex;align-items:flex-end;
+    padding:0 44px 90px;
+    background:
+      linear-gradient(to top, var(--nf-black) 2%, transparent 45%),
+      linear-gradient(to right, rgba(0,0,0,.85) 10%, rgba(0,0,0,.15) 60%),
+      radial-gradient(ellipse at 70% 20%, #3a0a0a 0%, var(--nf-black-2) 55%, var(--nf-black) 100%);
+  }
+  .hero-content{max-width:640px;}
+  .hero-eyebrow{
+    font-size:13px;letter-spacing:3px;color:var(--nf-red);
+    font-weight:700;text-transform:uppercase;margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(48px, 9vw, 96px);
+    line-height:.95;margin:0 0 18px;letter-spacing:1px;
+  }
+  .hero-role{font-size:19px;color:var(--nf-white);font-weight:600;margin-bottom:10px;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+    font-size:14px;color:var(--nf-gray);margin-bottom:20px;
+  }
+  .meta-chip{
+    border:1px solid var(--nf-gray-dim);padding:3px 9px;border-radius:3px;font-size:12px;
+  }
+  .hero-summary{
+    font-size:16px;line-height:1.55;color:#dcdcdc;margin-bottom:26px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 26px;border-radius:4px;border:none;
+    font-size:16px;font-weight:700;
+  }
+  .btn-play{background:var(--nf-white);color:#000;}
+  .btn-play:hover{background:#d6d6d6;}
+  .btn-info{background:rgba(109,109,110,.55);color:#fff;}
+  .btn-info:hover{background:rgba(109,109,110,.8);}
+
+  /* ===== SECTIONS / ROWS ===== */
+  .section{padding:52px 0 10px;}
+  .section-title{
+    font-family:var(--font-display);
+    font-size:26px;letter-spacing:.5px;
+    padding:0 44px;margin:0 0 14px;
+  }
+  .section-sub{
+    padding:0 44px;margin:-10px 0 18px;color:var(--nf-gray);font-size:13.5px;
+  }
+  .row-scroll{
+    display:flex;gap:14px;overflow-x:auto;padding:8px 44px 26px;
+    scroll-snap-type:x proximity;
+  }
+  @media (max-width:720px){
+    .section-title,.section-sub{padding:0 18px;}
+    .row-scroll{padding:8px 18px 22px;}
+  }
+
+  /* ===== CARDS ===== */
+  .card{
+    position:relative;flex:0 0 auto;width:290px;
+    background:var(--nf-black-3);border-radius:6px;overflow:hidden;
+    border:1px solid var(--nf-line);
+    scroll-snap-align:start;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card:hover, .card:focus-within{
+    transform:translateY(-6px) scale(1.035);
+    box-shadow:0 18px 34px rgba(0,0,0,.55);
+    border-color:var(--nf-gray-dim);
+    z-index:2;
+  }
+  .card-top{
+    height:96px;position:relative;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 14px;
+    background:linear-gradient(135deg,#241010,#141414 70%);
+  }
+  .card-ep{
+    font-family:var(--font-display);font-size:13px;color:var(--nf-gray);letter-spacing:1px;
+  }
+  .card-badge{
+    font-size:10px;font-weight:800;letter-spacing:.5px;
+    background:var(--nf-red);color:#fff;padding:3px 7px;border-radius:2px;
+  }
+  .card-body{padding:14px 16px 18px;}
+  .card-title{font-size:16px;font-weight:700;line-height:1.25;margin:0 0 8px;}
+  .card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--nf-gray);margin-bottom:10px;}
+  .card-meta span{border:1px solid var(--nf-line);padding:2px 7px;border-radius:3px;}
+  .card-desc{font-size:12.5px;color:#c7c7c7;line-height:1.5;margin:0 0 12px;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .card-btn{
+    background:none;border:1px solid var(--nf-gray-dim);color:var(--nf-white);
+    font-size:12px;font-weight:600;padding:7px 12px;border-radius:3px;width:100%;
+  }
+  .card-btn:hover{border-color:var(--nf-white);background:rgba(255,255,255,.06);}
+
+  /* wide research/experience cards */
+  .card.wide{width:340px;}
+
+  /* ===== GENRE / SKILL PILLS ===== */
+  .pill-wrap{display:flex;flex-wrap:wrap;gap:10px;padding:6px 44px 30px;}
+  @media (max-width:720px){.pill-wrap{padding:6px 18px 26px;}}
+  .pill{
+    border:1px solid var(--nf-line);background:var(--nf-black-3);
+    padding:9px 16px;border-radius:20px;font-size:13px;color:var(--nf-white);
+  }
+  .pill:hover{border-color:var(--nf-red);color:var(--nf-red);}
+
+  /* ===== AWARDS ===== */
+  .award-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:14px;padding:8px 44px 30px;
+  }
+  @media (max-width:720px){.award-grid{padding:8px 18px 26px;}}
+  .award-card{
+    border:1px solid var(--nf-line);background:var(--nf-black-3);
+    border-radius:6px;padding:18px;
+  }
+  .award-card .rank{
+    font-family:var(--font-display);color:var(--nf-red);font-size:22px;margin-bottom:6px;
+  }
+  .award-card h3{margin:0 0 6px;font-size:15px;}
+  .award-card p{margin:0;font-size:13px;color:var(--nf-gray);line-height:1.5;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding:50px 44px 70px;border-top:1px solid var(--nf-line);
+    margin-top:40px;color:var(--nf-gray);font-size:13.5px;
+  }
+  footer .foot-title{font-family:var(--font-display);font-size:22px;color:var(--nf-white);margin-bottom:12px;}
+  footer .foot-links{display:flex;flex-wrap:wrap;gap:22px;margin-top:16px;}
+  footer .foot-links a{color:var(--nf-gray);}
+  footer .foot-links a:hover{color:var(--nf-white);text-decoration:underline;}
+  @media (max-width:720px){footer{padding:40px 18px 60px;}}
+
+  /* ===== MODAL ===== */
+  .overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.8);
+    display:none;align-items:flex-start;justify-content:center;
+    padding:40px 16px;z-index:1000;overflow-y:auto;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--nf-black-2);max-width:640px;width:100%;
+    border-radius:8px;overflow:hidden;border:1px solid var(--nf-line);
+    animation:modalIn .25s ease;
+  }
+  @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.98);}to{opacity:1;transform:none;}}
+  .modal-head{
+    padding:26px 28px;position:relative;
+    background:linear-gradient(135deg,#2a0f10,#141414 75%);
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;background:rgba(20,20,20,.7);
+    border:1px solid var(--nf-line);color:#fff;border-radius:50%;
+    width:34px;height:34px;font-size:16px;line-height:1;
+  }
+  .modal-close:hover{background:var(--nf-red);border-color:var(--nf-red);}
+  .modal-head .card-badge{margin-bottom:10px;display:inline-block;}
+  .modal-head h2{font-size:24px;margin:0 0 8px;line-height:1.2;}
+  .modal-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--nf-gray);}
+  .modal-meta span{border:1px solid var(--nf-line);padding:3px 8px;border-radius:3px;}
+  .modal-body{padding:22px 28px 30px;}
+  .modal-body h4{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--nf-gray);margin:18px 0 8px;}
+  .modal-body h4:first-child{margin-top:0;}
+  .modal-body p{font-size:14.5px;line-height:1.6;color:#e2e2e2;margin:0;}
+  .cast-list{font-size:14px;color:#cfcfcf;line-height:1.7;}
+
+  /* skip link */
+  .skip{position:absolute;left:-999px;top:0;background:var(--nf-red);color:#fff;padding:10px;z-index:2000;}
+  .skip:focus{left:10px;top:10px;}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="intro" aria-hidden="true">
+  <div class="bars">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+  <div class="letters">AB</div>
+</div>
+
+<header id="siteHeader">
+  <div class="logo">AB</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#patents">Patents</a>
+    <a href="#experience">Experience</a>
+    <a href="#research">Research</a>
+    <a href="#awards">Awards</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <span class="nav-badge">Delhi, India</span>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-eyebrow">AB Original</div>
+      <h1>ALOLIKA<br>BHOWMIK</h1>
+      <div class="hero-role">AI Research Associate · LLM Evaluation &amp; Data Science</div>
+      <div class="hero-meta">
+        <span class="meta-chip">5 Patents Filed</span>
+        <span class="meta-chip">1 Published Paper</span>
+        <span class="meta-chip">Top 0.05% GSSoC</span>
+        <span class="meta-chip">M.Sc. Data Science</span>
+      </div>
+      <p class="hero-summary">
+        AI Research Associate and Data Science postgraduate working across LLM evaluation, machine learning,
+        and statistical analysis. Improved model accuracy, consistency, and instruction alignment by 30%+
+        across five large-scale AI evaluation projects, published a machine-learning research paper, and is a
+        named inventor on five filed patents.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-play" onclick="document.getElementById('patents').scrollIntoView()">▶ &nbsp;Play Portfolio</button>
+        <button class="btn btn-info" onclick="openModal('info-summary')">ⓘ &nbsp;More Info</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATENTS -->
+  <section class="section" id="patents">
+    <h2 class="section-title">Patent Portfolio — Season 2025</h2>
+    <p class="section-sub">Five filed patents, Episodes 1–5, in order of filing date · Chandigarh University</p>
+    <div class="row-scroll">
+
+      <article class="card" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP01</span>
+          <span class="card-badge">AB ORIGINAL</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Multi-Color Marker with Real-Time Ink Level Detection</h3>
+          <div class="card-meta"><span>Filed Feb 2025</span><span>14 pages</span><span>10 claims</span></div>
+          <p class="card-desc">A multi-color marker with a rotating dial selector and per-color ink sensors that lights an LED alert before any color runs dry.</p>
+          <button class="card-btn" onclick="openModal('p1')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP02</span>
+          <span class="card-badge">AB ORIGINAL</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Biometric Safety Pendant for Enhanced Personal Security</h3>
+          <div class="card-meta"><span>Filed Feb 2025</span><span>11 pages</span><span>10 claims</span></div>
+          <p class="card-desc">A wearable pendant combining fingerprint authentication, GPS tracking, and tamper sensors that alerts emergency contacts automatically.</p>
+          <button class="card-btn" onclick="openModal('p2')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP03</span>
+          <span class="card-badge">AB ORIGINAL</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Automatic Audio Device Power Limiting System</h3>
+          <div class="card-meta"><span>Filed May 2025</span><span>14 pages</span><span>10 claims</span></div>
+          <p class="card-desc">Caps daily earbud listening time, warns the user near the limit, and powers the device off automatically to protect hearing.</p>
+          <button class="card-btn" onclick="openModal('p3')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP04</span>
+          <span class="card-badge">AB ORIGINAL</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Smart Refrigerator with Automated Inventory Monitoring</h3>
+          <div class="card-meta"><span>Filed Jul 2025</span><span>9 pages</span><span>10 claims</span></div>
+          <p class="card-desc">An AI/IoT fridge that weighs, scans, and photographs its contents to track freshness and auto-reorder groceries.</p>
+          <button class="card-btn" onclick="openModal('p4')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP05</span>
+          <span class="card-badge">AB ORIGINAL</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Smart Duster with Integrated Timer, Watch &amp; Bluetooth Alert</h3>
+          <div class="card-meta"><span>Filed Sep 2025</span><span>11 pages</span><span>7 claims</span></div>
+          <p class="card-desc">A classroom duster with a lecture timer, built-in watch, and a Bluetooth link that pings your phone if it's left behind.</p>
+          <button class="card-btn" onclick="openModal('p5')">More Info</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <h2 class="section-title">Continue Watching: Career Timeline</h2>
+    <p class="section-sub">Roles across research, engineering, and product</p>
+    <div class="row-scroll">
+
+      <article class="card wide" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">NOW PLAYING</span>
+          <span class="card-badge">CURRENT</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">AI Research Associate — Keywords Studios</h3>
+          <div class="card-meta"><span>Aug 2025 – Present</span><span>Gurugram, HR</span></div>
+          <p class="card-desc">Designing prompts and evaluation frameworks across five LLM projects; lifted model accuracy and instruction alignment 30%+, holding a 95%+ quality benchmark on 1,000+ evaluations a week.</p>
+          <button class="card-btn" onclick="openModal('e1')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card wide" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP02</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Product Owner &amp; Full-Stack Intern — Infosys</h3>
+          <div class="card-meta"><span>Nov 2024 – Jan 2025</span><span>Remote</span></div>
+          <p class="card-desc">Owned product direction for FusionFits, an AI fashion e-commerce platform, and built its Flask/SQLite backend with secure login and recommendations.</p>
+          <button class="card-btn" onclick="openModal('e2')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card wide" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">S01 · EP01</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">AI Intern — Microsoft</h3>
+          <div class="card-meta"><span>Apr 2024 – Jun 2024</span><span>Remote</span></div>
+          <p class="card-desc">Built interactive Power BI dashboards and used Azure DevOps for project and version management on Microsoft's analytics tooling.</p>
+          <button class="card-btn" onclick="openModal('e3')">More Info</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="section" id="research">
+    <h2 class="section-title">New Release: Research &amp; Projects</h2>
+    <p class="section-sub">Published work and independent builds</p>
+    <div class="row-scroll">
+
+      <article class="card wide" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">DOCUMENTARY</span>
+          <span class="card-badge">PUBLISHED</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Predicting Child Labor Risk from Digital Literacy &amp; Internet Usage</h3>
+          <div class="card-meta"><span>GIJET Vol. 11 · Issue 1</span><span>Pages 4768–4774</span></div>
+          <p class="card-desc">A machine-learning model — Random Forest, Logistic Regression, and Gradient Boosting — that flags child-labor risk from digital-access and socioeconomic data.</p>
+          <button class="card-btn" onclick="openModal('r1')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card wide" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">FEATURE</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Comprehensive Content Analysis</h3>
+          <div class="card-meta"><span>May – Jun 2024</span><span>Power BI · Azure DevOps</span></div>
+          <p class="card-desc">Interactive Power BI dashboards analyzing Netflix content trends, shipped through an Azure DevOps CI/CD pipeline — fittingly, the project behind this page's theme.</p>
+          <button class="card-btn" onclick="openModal('r2')">More Info</button>
+        </div>
+      </article>
+
+      <article class="card wide" tabindex="0">
+        <div class="card-top">
+          <span class="card-ep">FEATURE</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Next-Gen Traffic Management System</h3>
+          <div class="card-meta"><span>Oct – Nov 2024</span><span>LSTM · CNN</span></div>
+          <p class="card-desc">LSTM and CNN models for accident prediction and vehicle classification, built with an explainable, modular architecture for live data.</p>
+          <button class="card-btn" onclick="openModal('r3')">More Info</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="section" id="awards">
+    <h2 class="section-title">Award-Winning</h2>
+    <p class="section-sub">Recognitions and selections</p>
+    <div class="award-grid">
+      <div class="award-card">
+        <div class="rank">#24</div>
+        <h3>GirlScript Summer of Code</h3>
+        <p>Ranked 24th of 60,000+ contributors — top 0.05%.</p>
+      </div>
+      <div class="award-card">
+        <div class="rank">★</div>
+        <h3>HPAIR Asia Conference 2024</h3>
+        <p>Selected delegate, Harvard College Project for Asian &amp; International Relations, Chulalongkorn University, Bangkok — Aug 21–25, 2024.</p>
+      </div>
+      <div class="award-card">
+        <div class="rank">1st</div>
+        <h3>Researchers' Meet in Mathematical Statistics</h3>
+        <p>First prize for PPT presentation and project exhibition, Data Analytics Society, Chandigarh University.</p>
+      </div>
+      <div class="award-card">
+        <div class="rank">★</div>
+        <h3>CRY — Star Performer 2023</h3>
+        <p>Recognized as Star Performer while volunteering with Child Rights and You.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <h2 class="section-title">Genres</h2>
+    <p class="section-sub">Core skill areas</p>
+    <div class="pill-wrap">
+      <span class="pill">AI / LLM Evaluation</span>
+      <span class="pill">Prompt Engineering</span>
+      <span class="pill">Machine Learning</span>
+      <span class="pill">Deep Learning (LSTM, CNN)</span>
+      <span class="pill">Explainable AI</span>
+      <span class="pill">Statistical Analysis</span>
+      <span class="pill">Business &amp; Product Analysis</span>
+      <span class="pill">Python</span>
+      <span class="pill">SQL</span>
+      <span class="pill">Flask</span>
+      <span class="pill">Power BI</span>
+      <span class="pill">Azure DevOps</span>
+      <span class="pill">JSON Schema Validation</span>
+      <span class="pill">Data Storytelling</span>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="foot-title">Next Episode: Let's Connect</div>
+  <p>Alolika Bhowmik — AI Research Associate, based in Delhi, India.</p>
+  <div class="foot-links">
+    <a href="mailto:alolikabhowmik72@gmail.com">alolikabhowmik72@gmail.com</a>
+    <a href="tel:+916900014399">+91 69000 14399</a>
+    <span>LinkedIn</span>
+    <span>GitHub</span>
+  </div>
+</footer>
+
+<!-- MODAL OVERLAY -->
+<div class="overlay" id="overlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal" id="modalContent" role="dialog" aria-modal="true"></div>
+</div>
+
+<script>
+  // header solid on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('solid', window.scrollY > 60);
+  });
+
+  const details = {
+    'info-summary': {
+      badge:'ABOUT', title:'Professional Summary',
+      meta:['Delhi, India','M.Sc. Data Science'],
+      sections:[
+        ['Overview','AI Research Associate and Data Science postgraduate with cross-functional expertise spanning LLM evaluation, machine learning, statistical data analysis, and business/product analysis. Track record improving model accuracy, consistency, and instruction alignment by 30%+ across five large-scale AI evaluation projects, achieving 95%+ schema accuracy on structured data workflows, and building Power BI dashboards that turn raw data into business insight.'],
+        ['Education','M.Sc. Data Science, Chandigarh University (CGPA 7.81) · Aug 2023 – Jun 2025<br>B.Sc. Mathematics, Gauhati University (CGPA 8.12) · Aug 2019 – Jul 2022'],
+        ['Contact','alolikabhowmik72@gmail.com · +91 69000 14399 · Delhi, India']
+      ]
+    },
+    p1:{badge:'S01 · EP01 — AB ORIGINAL', title:'Multi-Color Marker with Real-Time Ink Level Detection and Low Ink Alert System',
+      meta:['Application 202511008697 A','Filed 03/02/2025','Published 21/02/2025','14 pages · 10 claims'],
+      sections:[['Overview','A single marker body holding several ink reservoirs, switched with a rotating color-selector dial. Each reservoir carries its own ink-level sensor, and pressing a button on the body checks the selected color, lighting an LED if it is running low — so the user is never caught mid-stroke with a dry marker.'],
+      ['Inventors','Dr. Praveen Ailawalia · Hardik Sood · Alolika Bhowmik · Shyam Dodway · Naval Bhardwaj · Kanav Singla · Dr. Naveen Mani'],
+      ['Applicant','Chandigarh University']]},
+    p2:{badge:'S01 · EP02 — AB ORIGINAL', title:'Biometric Safety Pendant for Enhanced Personal Security',
+      meta:['Application 202511013062 A','Filed 15/02/2025','Published 28/02/2025','11 pages · 10 claims'],
+      sections:[['Overview','A wearable pendant built around a fingerprint scanner, so only an authorized wearer can activate it. Once armed, it watches for tampering, records situational audio, and — in an emergency — streams GPS location and audio straight to designated emergency contacts.'],
+      ['Inventors','Alolika Bhowmik · Hardik Sood · Shyam Dodway · Naval Bhardwaj · Kanav Singla · Dr. Praveen Ailawalia'],
+      ['Applicant','Chandigarh University']]},
+    p3:{badge:'S01 · EP03 — AB ORIGINAL', title:'Automatic Audio Device Power Limiting System for Hearing Protection',
+      meta:['Application 202511046372 A','Filed 14/05/2025','Published 30/05/2025','14 pages · 10 claims'],
+      sections:[['Overview','Tracks daily listening time on earbuds and similar audio devices. As the user nears a preset limit, it raises a visual and auditory warning; once the limit is crossed, the device powers itself off. A companion Bluetooth app shows usage history and lets the limit be customized.'],
+      ['Inventors','Alolika Bhowmik · Dr. Praveen Ailawalia · Hardik Sood · Shyam Dodway · Naval Bhardwaj'],
+      ['Applicant','Chandigarh University']]},
+    p4:{badge:'S01 · EP04 — AB ORIGINAL', title:'Smart Refrigerator with Automated Inventory Monitoring and Grocery Replenishment System',
+      meta:['Application 202511062724 A','Filed 01/07/2025','Published 18/07/2025','9 pages · 10 claims'],
+      sections:[['Overview','Combines weight sensors, RFID/barcode scanning, AI-powered cameras, and freshness detectors to track what is actually in the fridge. A touchscreen panel and voice assistant surface expiry alerts, and the system can place grocery reorders automatically once stock runs low.'],
+      ['Inventors','Alolika Bhowmik · Dr. Praveen Ailawalia'],
+      ['Applicant','Chandigarh University']]},
+    p5:{badge:'S01 · EP05 — AB ORIGINAL', title:'Smart Duster with Integrated Timer, Watch, and Bluetooth Alert System',
+      meta:['Application 202511089393 A','Filed 19/09/2025','Published 10/10/2025','11 pages · 7 claims'],
+      sections:[['Overview','A classroom duster fitted with a built-in lecture timer and beeper, an analog watch for quick timekeeping, and a Bluetooth link that alerts a paired phone if the duster is left behind — plus a holder for the marker pen itself.'],
+      ['Inventors','Dr. Praveen Ailawalia · Shyam · Alolika Bhowmik · Dr. Naveen Mani'],
+      ['Applicant','Chandigarh University']]},
+    e1:{badge:'CURRENT ROLE', title:'AI Research Associate — Keywords Studios',
+      meta:['Aug 2025 – Present','Gurugram, Haryana · Full-time'],
+      sections:[['Highlights','Contributed to five large-scale AI/LLM evaluation projects, designing structured prompts and response frameworks that lifted model accuracy, consistency, and instruction alignment by 30%+. Built structured JSON data workflows with strict formatting rules, hitting 95%+ schema accuracy. Evaluated and annotated 1,000+ data points a week, and was fast-tracked into an advanced validation role covering end-to-end interaction auditing.'],
+      ['Skills used','LLM Evaluation · Prompt Engineering · JSON Schema Validation · Quality Assurance · Workflow Auditing']]},
+    e2:{badge:'PAST ROLE', title:'Python Full Stack Intern (Product Owner) — Infosys',
+      meta:['Nov 2024 – Jan 2025','Remote · Internship'],
+      sections:[['Highlights','Acted as Product Owner for FusionFits, an AI-powered fashion e-commerce platform — setting product direction, aligning stakeholders, and managing the lifecycle end to end. Built full-stack features with Flask, SQLite, and Flask-Login, including secure auth and AI-driven recommendations, plus data-visualization features validated with Pytest.'],
+      ['Skills used','Python · Flask · SQLite · Flask-Login · HTML/CSS/JS · Pytest · Product Ownership']]},
+    e3:{badge:'PAST ROLE', title:'AI Intern — Microsoft',
+      meta:['Apr 2024 – Jun 2024','Remote · Internship'],
+      sections:[['Highlights','Used Azure DevOps for project management and version control, and built interactive dashboards and reports in Power BI — hands-on time with Microsoft\'s analytics and DevOps stack.'],
+      ['Skills used','Power BI · Azure DevOps · Data Visualization']]},
+    r1:{badge:'PUBLISHED PAPER', title:'Predicting Child Labor Risk Based on Digital Literacy and Internet Usage Patterns',
+      meta:['GRENZE International Journal of Engineering & Technology','Vol. 11, Issue 1 · Pages 4768–4774'],
+      sections:[['Overview','A machine-learning approach to estimating child-labor risk from digital-literacy level, daily internet usage, and socioeconomic status. Logistic Regression, Random Forest, and Gradient Boosting were compared, with Random Forest coming out most accurate — pointing to digital access as a meaningful predictor and making the case for digital-education policy as a preventive tool.'],
+      ['Authors','Alolika Bhowmik · Praveen Ailawalia']]},
+    r2:{badge:'PROJECT', title:'Comprehensive Content Analysis',
+      meta:['May – Jun 2024','Power BI · Azure DevOps'],
+      sections:[['Overview','Interactive Power BI dashboards analyzing Netflix content trends, built and shipped through an Azure DevOps CI/CD pipeline.']]},
+    r3:{badge:'PROJECT', title:'Next-Gen Traffic Management System',
+      meta:['Oct – Nov 2024','LSTM · CNN · Python'],
+      sections:[['Overview','LSTM and CNN models for accident prediction and vehicle classification, built with a modular, explainable-AI architecture designed to support live data feeds.']]}
+  };
+
+  function openModal(key){
+    const d = details[key];
+    if(!d) return;
+    const modal = document.getElementById('modalContent');
+    let sectionsHtml = d.sections.map(s => `<h4>${s[0]}</h4><p>${s[1]}</p>`).join('');
+    modal.innerHTML = `
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+        <span class="card-badge">${d.badge}</span>
+        <h2>${d.title}</h2>
+        <div class="modal-meta">${d.meta.map(m=>`<span>${m}</span>`).join('')}</div>
+      </div>
+      <div class="modal-body">${sectionsHtml}</div>
+    `;
+    document.getElementById('overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modal.focus();
+  }
+  function closeModal(){
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
